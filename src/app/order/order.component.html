@@ -1,0 +1,253 @@
+<div class="container">
+  <!-- <form> -->
+    <label>Supplier</label>
+    <br>
+    <select name="selectedItem" [(ngModel)]="selectedItem" (ngModelChange)="onSelectionChange($event)" >
+      <option [ngValue]="null" disabled>Select Supplier</option>
+      <option *ngFor="let item of items"  [ngValue]="item">{{item.name}}</option>
+    </select>
+    <div *ngIf="selectedItem != null">
+     {{selectedItem.name }}<br>
+     {{selectedItem.address }}<br>
+     {{selectedItem.City }}<br>
+     {{selectedItem.Mobile }}<br>
+     {{selectedItem.email }}
+    </div>
+   
+    <hr>
+    <div>
+      <span>Employee:Ashvin Yadav</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>Date:06-07-2022</span>
+    </div>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class='mytabstyle'>
+            All
+          </div>
+        </ng-template>
+        <!-- #docregion multi -->
+        <mat-accordion class="example-headers-align">
+          <!-- #enddocregion multi -->
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Electronics
+              </mat-panel-title>
+              
+            </mat-expansion-panel-header>
+
+            <div class="row" *ngFor="let el of products, let i=index">
+    
+              <div class="pull-left col-sm-4">
+                <p>{{el.product}}</p>
+                <h4>{{el.code}}</h4>
+                <p class="price">Rate - {{el.price}}</p>
+              </div>
+              <div class="col-sm-4">
+                <img class="pull-right" src={{el.imgProduct}} height="80px">
+              </div>
+              <div class="pull-left col-sm-4">
+                <div class="row">
+               
+              <!-- <p>Quanity Added {{qa}} </p> -->
+						<button *ngIf="!(conditionToDisaply && getQuantity(i) >0)" mat-raised-button color="primary" class="btn-size" (click)="addToCart(i,el.id)"> Add to Cart</button>
+
+            <!-- //hidden buttons to add and delete -->
+						<span *ngIf="(conditionToDisaply && getQuantity(i) >0)">
+                <button mat-raised-button color="accent" class="btn-size-small" (click)="removeFromCart(i,el.id)"> - </button>
+                  <label class="label-small">Items in Cart {{getQuantity(i)}} </label>
+                <button mat-raised-button color="accent" class="btn-size-small" (click)="addToCart(i,el.id)" > + </button>
+            </span>
+                  
+                </div>
+              
+              </div> 
+              <div *ngIf="(conditionToDisaply && getQuantity(i) >0)" style="background-color: rgb(255, 153, 0);">
+                <span>{{getQuantity(i)}} Item | 3999</span>
+                <span>
+                  <button mat-raised-button color="primary" class="btn-size" (click)="show()"> View Cart</button>
+                </span>
+  
+              </div>
+            </div>
+          
+
+          </mat-expansion-panel>
+
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  Vehicles
+              </mat-panel-title>
+             
+            </mat-expansion-panel-header>
+
+            <div class="row">
+    
+              <div class="pull-left col-sm-4">
+                <p>Royal Enfield Classic-350</p>
+                <h4>Code:P_SPR_001</h4>
+                <p class="price">Rate - 3999</p>
+              </div>
+              <div class="col-sm-4">
+                <img class="pull-right" src="../../assets/images/royalenfield.jpg" height="80px">
+              </div>
+              <div class="pull-left col-sm-4">
+                <div class="row">
+               
+                  <button class="btn btn-primary" (click)="onAdd()">Add</button>
+                  
+                </div>
+              </div>  
+
+              <div class="pull-left col-sm-4">
+                <h4>Tata Neon</h4>
+                <h4>Code:P_SPR_001</h4>
+                <p class="price">Rate - 3999</p>
+              </div>
+              <div class="col-sm-4">
+                <img class="pull-right" src="../../assets/images/front-left-side-47.jpg" height="80px">
+              </div>
+              <div class="pull-left col-sm-4">
+                <div class="row">
+               
+                  <button class="btn btn-primary" (click)="onAdd()">Add</button>
+                  
+                </div>
+              </div>  
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab>
+      
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class='mytabstyle'>
+            Electronics
+          </div>
+        </ng-template>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Electronics
+            </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+
+          <div class="row">
+  
+            <div class="pull-left col-sm-4">
+              <p>Apple Smart Watch</p>
+              <h4>Code:P_SPR_001</h4>
+              <p class="price">Rate - 3999</p>
+            </div>
+            <div class="col-sm-4">
+              <img class="pull-right" src="../../assets/images/applewatch.jpg" height="80px">
+            </div>
+            <div class="pull-left col-sm-4">
+              <div class="row">
+             
+                <button class="btn btn-primary" (click)="onAdd()">Add</button>
+                
+              </div>
+            </div>  
+
+            <div class="pull-left col-sm-4">
+              <h4>Philipe Speaker</h4>
+              <h4>Code:P_SPR_001</h4>
+              <p class="price">Rate - 3999</p>
+            </div>
+            <div class="col-sm-4">
+              <img class="pull-right" src="../../assets/images/philipsespeaker.avif" height="80px">
+            </div>
+            <div class="pull-left col-sm-4">
+              <div class="row">
+             
+                <button class="btn btn-primary" (click)="onAdd()">Add</button>
+                
+              </div>
+            </div>  
+          </div>
+         
+        </mat-expansion-panel>
+
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class='mytabstyle'>
+            Vehicles
+          </div>
+        </ng-template>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Professional data
+            </mat-panel-title>
+            <mat-panel-description>
+              Type your name and age
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+        
+
+        </mat-expansion-panel>
+
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class='mytabstyle'>
+            Voucher
+          </div>
+        </ng-template>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Professional data
+            </mat-panel-title>
+            <mat-panel-description>
+              Type your name and age
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+    
+
+        </mat-expansion-panel>
+
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class='mytabstyle'>
+            Tools
+          </div>
+        </ng-template>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Professional data
+            </mat-panel-title>
+            <mat-panel-description>
+              Type your name and age
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+     
+
+        </mat-expansion-panel>
+
+      </mat-tab>
+    </mat-tab-group>
+
+  <!-- </form> -->
+</div>
